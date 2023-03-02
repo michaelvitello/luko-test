@@ -18,7 +18,7 @@ export type ImagePickerResult =
     | undefined
 
 const takePhoto: () => Promise<ImagePickerResult> = async () => {
-   const { granted } = await ExpoImagePicker.requestCameraPermissionsAsync()
+    const { granted } = await ExpoImagePicker.requestCameraPermissionsAsync()
     // not supported on iOS simulator, you can use MediaLibrary with pickImage method instead
     if (granted) {
         const pickerResult = await ExpoImagePicker.launchCameraAsync({
