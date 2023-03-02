@@ -1,0 +1,27 @@
+{ "items": [
+        {
+            "id": 1,
+            "name": "Cartier ring",
+            "purchasePrice": 5780,
+            "type": "JEWELRY",
+            "description": "Gift from my grandfather",
+            "photo": "https://i.ibb.co/znXC7LQ/marcus-lewis-U63z-XX2f7ho-unsplash.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Guitar",
+            "purchasePrice": 850,
+            "type": "MUSIC_INSTRUMENT",
+            "description": "",
+            "photo": "https://i.ibb.co/4dfndL2/louis-hansel-M-d-J-Scwa-LE-unsplash.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Bracelet",
+            "purchasePrice": 850,
+            "type": "JEWELRY",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "photo": "https://i.ibb.co/4dfndL2/louis-hansel-M-d-J-Scwa-LE-unsplash.jpg"
+        }
+    ]
+}
