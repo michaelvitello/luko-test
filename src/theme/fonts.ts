@@ -1,4 +1,4 @@
 export const fonts = {
-    regular: "Circular-Regular",
-    bold: "Circular-Bold"
+    regular: 'Circular-Regular',
+    bold: 'Circular-Bold',
 }
