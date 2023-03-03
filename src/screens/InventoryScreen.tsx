@@ -12,7 +12,7 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
     /* TBC -> Worth doing in a state?... Not ideal we pass twice 1 - Empty ARR 2 - Array with items, x2 renders */
     const [items, setItems] = useState<Items>([])
 
-    /* Init DB for local item storage */
+    /* Open DB for local item storage */
     const db = SQLite.openDatabase('db.db')
 
     /* For our demo purpose, we init the DB with 3 initial items so that the flashlist is already filled up. */
@@ -42,8 +42,7 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
                 setItems(_items)
             })
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [db])
 
     /* To use if we want to clear the DB to reset the demo */
     // useEffect(() => {
@@ -56,7 +55,10 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
     //     console.log('DB', db)
     // }, [])
 
-    const handleAddButtonPress = () => navigation.navigate('AddItem')
+    const handleAddButtonPress = () =>
+        navigation.navigate('AddItem', {
+            dbLength: items.length,
+        })
     const handleItemPress = () => navigation.navigate('Item')
 
     const keyExtractor = (_item: InventoryItem, index: number) => {
@@ -76,7 +78,7 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
     }
 
     const contentContainerStyle = {
-        padding: '7%',
+        paddingVertical: '7%',
     }
 
     return (

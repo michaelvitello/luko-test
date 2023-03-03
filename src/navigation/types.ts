@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { Dispatch, SetStateAction } from 'react'
 
 declare global {
     namespace ReactNavigation {
@@ -15,7 +16,7 @@ declare global {
 
 export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | { title: string }
-    AddItem: undefined
+    AddItem: { dbLength: number }
     Item: undefined
     NotFound: undefined
 }
