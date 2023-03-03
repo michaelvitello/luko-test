@@ -1,16 +1,22 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text } from 'react-native'
+import { StyleSheet, View, Image, Text, Pressable } from 'react-native'
+import { colors } from '../theme/colors'
 import { fonts } from '../theme/fonts'
 
 interface TileProps {
     image: string
     price: string | number
     title: string
+    handleItemPress: () => void
 }
 
-const Tile = ({ image, price, title }: TileProps): JSX.Element => {
+const Tile = ({ image, price, title, handleItemPress }: TileProps): JSX.Element => {
     return (
-        <View style={styles.container}>
+        <Pressable
+            onPress={handleItemPress}
+            pressRetentionOffset={10}
+            style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }, styles.container]}
+        >
             <Image source={{ uri: image }} style={styles.imageContainer} />
             <View style={styles.infoContainer}>
                 <Text numberOfLines={2} style={styles.title}>
@@ -18,7 +24,7 @@ const Tile = ({ image, price, title }: TileProps): JSX.Element => {
                 </Text>
                 <Text numberOfLines={1} style={styles.price}>{`${price} €`}</Text>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
@@ -51,8 +57,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     price: {
-        fontFamily: fonts.regular,
+        fontFamily: fonts.bold,
         fontSize: 15,
-        color: 'grey',
+        color: colors.mainGrey,
     },
 })

@@ -13,6 +13,7 @@ import { Pressable, Text, View } from 'react-native'
 import { Title } from '../components/Title'
 import AddItemScreen from '../screens/AddItemScreen'
 import InventoryScreen from '../screens/InventoryScreen'
+import ItemScreen from '../screens/ItemScreen'
 import { colors } from '../theme/colors'
 import { fonts } from '../theme/fonts'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from './types'
@@ -56,6 +57,7 @@ function RootNavigator() {
             <Stack.Screen component={NotFound} name='NotFound' options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal', headerShown: false }}>
                 <Stack.Screen component={AddItemScreen} name='AddItem' />
+                <Stack.Screen component={ItemScreen} name='Item' />
             </Stack.Group>
         </Stack.Navigator>
     )
