@@ -1,3 +1,4 @@
+import * as SQLite from 'expo-sqlite'
 import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import {
@@ -16,11 +17,12 @@ import { ImagePicker } from '../sdk/ImagePicker'
 import { colors } from '../theme/colors'
 import { fonts } from '../theme/fonts'
 
-export default function AddItemScreen({ navigation }: RootTabScreenProps<'AddItemScreen'>) {
+export default function AddItemScreen({ navigation, route }: RootTabScreenProps<'AddItemScreen'>) {
     /* Initialize Form for item addition */
     const {
         control,
         handleSubmit,
+        // getFieldState,
         formState: { errors, isValid },
     } = useForm({
         defaultValues: {
@@ -30,12 +32,39 @@ export default function AddItemScreen({ navigation }: RootTabScreenProps<'AddIte
         },
     })
 
+    // const nameState = getFieldState('name')
+    // const valueState = getFieldState('value')
+
     /* Image state for item picture */
     const [image, setImage] = useState(null)
 
+    /* Open DB for local item storage */
+    const db = SQLite.openDatabase('db.db')
+
     /* Form submission - TODO: Write in DB to update list */
+    /* Using useForm, it's impossible to submit non valid items (see require rule), no need for further checks */
     const onSubmit = data => {
-        // console.log(data) -> Logged data for debug
+        const newItem = {
+            id: route.params.dbLength + 1, // Current length of DB
+            name: data.name,
+            purchasePrice: data.value,
+            type: data.type || '',
+            description: data.description || '',
+            photo: image || '',
+        }
+
+        // Convert to JSON for DB
+        db.transaction(tx => {
+            tx.executeSql('insert or ignore into items (value) values (?)', [
+                JSON.stringify(newItem),
+            ])
+            // Log to track added items
+            // tx.executeSql('select * from items', [], (_, { rows: { _array } }) => {
+            //     console.log(JSON.stringify(_array))
+            // })
+        })
+
+        // If successful, update items and go back to inventory screen
         navigation.goBack()
     }
 
@@ -53,7 +82,7 @@ export default function AddItemScreen({ navigation }: RootTabScreenProps<'AddIte
         /* Try KeyboardAwareScrollView ? https://github.com/APSL/react-native-keyboard-aware-scroll-view */
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            contentContainerStyle={{ flexGrow: 1 }} // Not sure that works...
+            enabled={false} // TO FIX
             style={styles.container}
         >
             <View style={styles.buttonsContainer}>
@@ -74,56 +103,94 @@ export default function AddItemScreen({ navigation }: RootTabScreenProps<'AddIte
                         </Text>
                     )}
                 </Pressable>
+                {image ? (
+                    <Text numberOfLines={1} style={[styles.subTitle, { color: colors.mainGrey }]}>
+                        {'Tap to change'}
+                    </Text>
+                ) : (
+                    <Text numberOfLines={1} style={[styles.subTitle, { color: 'red' }]}>
+                        {'Mandatory'}
+                    </Text>
+                )}
             </View>
             <Controller
                 control={control}
                 name='name'
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        placeholder=' Name'
-                        style={styles.input}
-                        value={value}
-                    />
+                render={({ field: { onChange, onBlur, value }, fieldState }) => (
+                    <>
+                        <Text numberOfLines={1} style={styles.headerTitle}>
+                            {'Name'}
+                        </Text>
+                        <TextInput
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            placeholder=' Bracelet'
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor:
+                                        fieldState.isTouched && !value ? 'red' : colors.mainGrey,
+                                },
+                            ]}
+                            value={value}
+                        />
+                    </>
                 )}
                 rules={{
                     required: true,
+                    minLength: 1,
                 }}
             />
             {errors.name && <Text>This is required.</Text>}
             <Controller
                 control={control}
                 name='value'
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        keyboardType='numeric'
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        placeholder=' 0 €'
-                        style={styles.input}
-                        value={value}
-                    />
+                render={({ field: { onChange, onBlur, value }, fieldState }) => (
+                    <>
+                        <Text numberOfLines={1} style={styles.headerTitle}>
+                            {'Value'}
+                        </Text>
+                        <TextInput
+                            keyboardType='numeric'
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            placeholder=' 0 €'
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor:
+                                        fieldState.isTouched && !value ? 'red' : colors.mainGrey,
+                                },
+                            ]}
+                            value={value}
+                        />
+                    </>
                 )}
                 rules={{
                     max: 40000,
-                    min: 0,
+                    min: 1,
                     required: true,
                     maxLength: 1000,
+                    minLength: 1,
                 }}
             />
             <Controller
                 control={control}
                 name='description'
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        multiline={true}
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        placeholder=' Description (optional)'
-                        style={styles.descriptionInput}
-                        value={value}
-                    />
+                    <>
+                        <Text numberOfLines={1} style={styles.headerTitle}>
+                            {'Description'}
+                        </Text>
+                        <TextInput
+                            multiline={true}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            placeholder=' Optional'
+                            style={styles.descriptionInput}
+                            value={value}
+                        />
+                    </>
                 )}
             />
         </KeyboardAvoidingView>
@@ -155,9 +222,8 @@ const styles = StyleSheet.create({
         height: 40,
         width: '100%',
         borderWidth: 1,
-        borderColor: colors.mainGrey,
         borderRadius: 5,
-        marginBottom: 50,
+        marginBottom: 20,
         fontFamily: fonts.bold,
         fontSize: 12,
         paddingHorizontal: 10,
@@ -188,10 +254,10 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     imageButton: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        borderWidth: 5,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        borderWidth: 2,
         borderColor: colors.mainBlue,
         alignItems: 'center',
         justifyContent: 'center',
@@ -201,5 +267,17 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 12,
         color: colors.mainGrey,
+    },
+    subTitle: {
+        paddingTop: 10,
+        fontFamily: fonts.bold,
+        fontSize: 10,
+        // color: colors.mainGrey,
+    },
+    headerTitle: {
+        paddingBottom: 10,
+        fontFamily: fonts.bold,
+        fontSize: 12,
+        color: 'black',
     },
 })
