@@ -57,6 +57,7 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
     // }, [])
 
     const handleAddButtonPress = () => navigation.navigate('AddItem')
+    const handleItemPress = () => navigation.navigate('Item')
 
     const keyExtractor = (_item: InventoryItem, index: number) => {
         return index.toString()
@@ -65,7 +66,12 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
     const renderItem = (item: InventoryItem) => {
         // TODO: Understand why item.item...
         return (
-            <Tile image={item.item.photo} price={item.item.purchasePrice} title={item.item.name} />
+            <Tile
+                handleItemPress={handleItemPress}
+                image={item.item.photo}
+                price={item.item.purchasePrice}
+                title={item.item.name}
+            />
         )
     }
 
@@ -97,6 +103,15 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 20,
         backgroundColor: colors.background,
+    },
+    tileContainer: {
+        width: '92%', // Trick to get space in-between columns: columnWrapperStyle unsupported in Flashlist
+        height: 250, // TODO: Better calculation
+        borderRadius: 18,
+        marginBottom: '8%',
+        overflow: 'hidden',
+        borderWidth: 0.3,
+        borderColor: 'blue',
     },
     listContainer: {
         flex: 1,
