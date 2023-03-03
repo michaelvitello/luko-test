@@ -22,7 +22,6 @@ export default function AddItemScreen({ navigation, route }: RootTabScreenProps<
     const {
         control,
         handleSubmit,
-        // getFieldState,
         formState: { errors, isValid },
     } = useForm({
         defaultValues: {
@@ -31,9 +30,6 @@ export default function AddItemScreen({ navigation, route }: RootTabScreenProps<
             description: '',
         },
     })
-
-    // const nameState = getFieldState('name')
-    // const valueState = getFieldState('value')
 
     /* Image state for item picture */
     const [image, setImage] = useState(null)
@@ -55,9 +51,7 @@ export default function AddItemScreen({ navigation, route }: RootTabScreenProps<
 
         // Convert to JSON for DB
         db.transaction(tx => {
-            tx.executeSql('insert or ignore into items (value) values (?)', [
-                JSON.stringify(newItem),
-            ])
+            tx.executeSql('insert into items (value) values (?)', [JSON.stringify(newItem)])
             // Log to track added items
             // tx.executeSql('select * from items', [], (_, { rows: { _array } }) => {
             //     console.log(JSON.stringify(_array))
