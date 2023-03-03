@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#F4F3EF",
+        "flex": 1,
+        "paddingHorizontal": 20,
+        "paddingTop": 10,
+      },
+      Object {
+        "paddingBottom": 0,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginTop": 16,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={20}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#2D50E6",
+            "fontSize": 17,
+          }
+        }
+      >
+        Cancel
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={20}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#C0BEB8",
+            "fontSize": 17,
+          }
+        }
+      >
+        Add
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": "20%",
+        "justifyContent": "center",
+        "marginBottom": 50,
+        "marginTop": 50,
+        "overflow": "hidden",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "opacity": 1,
+          },
+          Object {
+            "alignItems": "center",
+            "borderColor": "#2D50E6",
+            "borderRadius": 60,
+            "borderWidth": 2,
+            "height": 120,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 120,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "#C0BEB8",
+            "fontFamily": "Circular-Bold",
+            "fontSize": 12,
+          }
+        }
+      >
+        Add Photo
+      </Text>
+    </View>
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "fontFamily": "Circular-Bold",
+            "fontSize": 10,
+            "paddingTop": 10,
+          },
+          Object {
+            "color": "red",
+          },
+        ]
+      }
+    >
+      Mandatory
+    </Text>
+  </View>
+  <Text
+    numberOfLines={1}
+    style={
+      Object {
+        "color": "black",
+        "fontFamily": "Circular-Bold",
+        "fontSize": 12,
+        "paddingBottom": 10,
+      }
+    }
+  >
+    Name
+  </Text>
+  <TextInput
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    placeholder=" Bracelet"
+    style={
+      Array [
+        Object {
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "color": "black",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 12,
+          "height": 40,
+          "marginBottom": 20,
+          "paddingHorizontal": 10,
+          "width": "100%",
+        },
+        Object {
+          "borderColor": "#C0BEB8",
+        },
+      ]
+    }
+    value=""
+  />
+  <Text
+    numberOfLines={1}
+    style={
+      Object {
+        "color": "black",
+        "fontFamily": "Circular-Bold",
+        "fontSize": 12,
+        "paddingBottom": 10,
+      }
+    }
+  >
+    Value
+  </Text>
+  <TextInput
+    keyboardType="numeric"
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    placeholder=" 0 €"
+    style={
+      Array [
+        Object {
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "color": "black",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 12,
+          "height": 40,
+          "marginBottom": 20,
+          "paddingHorizontal": 10,
+          "width": "100%",
+        },
+        Object {
+          "borderColor": "#C0BEB8",
+        },
+      ]
+    }
+    value=""
+  />
+  <Text
+    numberOfLines={1}
+    style={
+      Object {
+        "color": "black",
+        "fontFamily": "Circular-Bold",
+        "fontSize": 12,
+        "paddingBottom": 10,
+      }
+    }
+  >
+    Description
+  </Text>
+  <TextInput
+    multiline={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    placeholder=" Optional"
+    style={
+      Object {
+        "borderColor": "#C0BEB8",
+        "borderRadius": 5,
+        "borderWidth": 1,
+        "color": "black",
+        "fontFamily": "Circular-Bold",
+        "fontSize": 12,
+        "height": 120,
+        "paddingHorizontal": 10,
+        "width": "100%",
+      }
+    }
+    value=""
+  />
+</View>
+`;

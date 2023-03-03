@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "opacity": 1,
+      },
+      Object {
+        "borderColor": "blue",
+        "borderRadius": 18,
+        "borderWidth": 0.3,
+        "height": 250,
+        "marginBottom": "8%",
+        "overflow": "hidden",
+        "width": "92%",
+      },
+    ]
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "height": "50%",
+        "resizeMode": "cover",
+        "width": "100%",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "height": "50%",
+        "justifyContent": "space-around",
+        "paddingLeft": 15,
+        "paddingRight": 15,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      numberOfLines={2}
+      style={
+        Object {
+          "fontFamily": "Circular-Bold",
+          "fontSize": 24,
+        }
+      }
+    />
+    <Text
+      numberOfLines={1}
+      style={
+        Object {
+          "color": "#C0BEB8",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 15,
+        }
+      }
+    >
+      undefined €
+    </Text>
+  </View>
+</View>
+`;
