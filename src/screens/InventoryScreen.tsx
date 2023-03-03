@@ -1,9 +1,11 @@
+import { FlashList } from '@shopify/flash-list'
 import * as SQLite from 'expo-sqlite'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import Tile from '../components/Tile'
 import { Title } from '../components/Title'
 import data from '../data/localset.json'
-import { RootTabScreenProps, Items } from '../navigation/types'
+import { RootTabScreenProps, Items, InventoryItem } from '../navigation/types'
 import { colors } from '../theme/colors'
 
 export default function InventoryScreen({ navigation, route }: RootTabScreenProps<'Inventory'>) {
@@ -34,7 +36,7 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
                 const _items: Items = []
                 for (let i = 0; i < _array.length; i++) {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-                    _items.push(_array[i].value) // TO FIX
+                    _items.push(JSON.parse(_array[i].value)) // TO FIX
                 }
 
                 setItems(_items)
@@ -56,9 +58,36 @@ export default function InventoryScreen({ navigation, route }: RootTabScreenProp
 
     const handleAddButtonPress = () => navigation.navigate('AddItem')
 
+    const keyExtractor = (_item: InventoryItem, index: number) => {
+        return index.toString()
+    }
+
+    const renderItem = (item: InventoryItem) => {
+        // TODO: Understand why item.item...
+        return (
+            <Tile image={item.item.photo} price={item.item.purchasePrice} title={item.item.name} />
+        )
+    }
+
+    const contentContainerStyle = {
+        padding: '7%',
+    }
+
     return (
         <View style={styles.container}>
             <Title onButtonPress={handleAddButtonPress}>{route.name}</Title>
+            <View style={styles.listContainer}>
+                <FlashList // TODO: Add estimated Size List for virtualization
+                    contentContainerStyle={contentContainerStyle}
+                    data={items}
+                    estimatedItemSize={225} // TO DO or via warnings
+                    horizontal={false}
+                    keyExtractor={keyExtractor}
+                    numColumns={2}
+                    renderItem={renderItem} // TO DO Fix typing
+                    showsVerticalScrollIndicator={false}
+                />
+            </View>
         </View>
     )
 }
@@ -68,5 +97,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 20,
         backgroundColor: colors.background,
+    },
+    listContainer: {
+        flex: 1,
+        paddingLeft: '4%',
     },
 })
