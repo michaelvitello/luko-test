@@ -4,13 +4,14 @@ import { useForm, Controller } from 'react-hook-form'
 import {
     StyleSheet,
     View,
-    KeyboardAvoidingView,
+    // KeyboardAvoidingView,
     TextInput,
     Pressable,
     Platform,
     Text,
     Image,
 } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Button from '../components/Button'
 import { RootTabScreenProps } from '../navigation/types'
 import { ImagePicker } from '../sdk/ImagePicker'
@@ -72,12 +73,11 @@ export default function AddItemScreen({ navigation, route }: RootTabScreenProps<
     const enableAddButton = isValid && image
 
     return (
-        /* TODO - Fix Keyboard not overlapping view */
-        /* Try KeyboardAwareScrollView ? https://github.com/APSL/react-native-keyboard-aware-scroll-view */
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            enabled={false} // TO FIX
-            style={styles.container}
+        <KeyboardAwareScrollView
+            contentContainerStyle={styles.container}
+            enableAutomaticScroll
+            enableOnAndroid
+            keyboardShouldPersistTaps='handled'
         >
             <View style={styles.buttonsContainer}>
                 <Button onPress={() => navigation.goBack()} title='Cancel' />
@@ -187,7 +187,7 @@ export default function AddItemScreen({ navigation, route }: RootTabScreenProps<
                     </>
                 )}
             />
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
     )
 }
 
