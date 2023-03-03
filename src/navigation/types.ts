@@ -44,7 +44,7 @@ export type InventoryItem = {
     value: string | number
     type?: string
     description?: string
-    photo?: string
+    photo: string
 }
 
 export type Items = InventoryItem[]
